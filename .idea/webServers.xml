@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="dcc1c43b-3175-462a-a9bb-bb4127457663" name="server1" url="http://ndisproject.qianyujin.co/">
+        <fileTransfer host="109.199.119.93" port="21" rootFolder="/public_html/mapmyworld">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

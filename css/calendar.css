@@ -1,0 +1,14 @@
+body{
+    margin:0;
+    padding:0;
+}
+.tab1{
+    width: 16.66%;
+    height: 52px;
+    background-color: #dddddd;
+    color: #99bbff;
+    font-weight: 600;
+    float:left;
+    padding:10px;
+    text-align: center;
+}

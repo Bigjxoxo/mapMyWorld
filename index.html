@@ -8,30 +8,30 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/jquery-ui.min.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/email.js"></script>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/load-pages.js"></script>
     <title>Map My World</title>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row clearfix wrap">
             <div class="content">
-            <div class="col-xs-6 col-md-2 column nav-bar">
+            <div class="col-xs-6 col-md-2 column nav-bar" id="left-column">
                 <div class="top-area"><img src="img/logo-index.gif" alt="logo"/></div>
 
                     <div id="accordion">
-                        <h3>ME MYSELF</h3>
+                        <h2>ME MYSELF</h2>
                         <div class="nav-stacked">
                             <dl>
-                                <dd><a href="#">How I wish my week looked</a></dd>
-                                <dd><a href="#">My short term dreams and goals: next 12 months</a></dd>
+                                <dd><a href="q1.html">How I wish my week looked</a></dd>
+                                <dd><a href="q2.html">My short term dreams and goals: next 12 months</a></dd>
                                 <dd><a href="#">My long term dreams and goals: the future</a></dd>
                                 <dd><a href="#">My ultimate bucket list</a></dd>
                             </dl>
                         </div>
-                        <h3>DREAM & GOAL</h3>
+                        <h2>DREAM & GOAL</h2>
                         <div class="nav-stacked">
                             <dl>
                                 <dd><a href="#">How I wish my week looked</a></dd>
@@ -89,28 +89,26 @@
                     </div>
 
 
-                    <div class="panel panel-primary">
-
-                            <h1>HELLO, My Name Is</h1>
-                                <div class="form-group">
-                                    <input class="form-control input-lg" type="text" placeholder="My Name Is...">
-                                </div>
-                            <h1>Email</h1>
-                                <div class="form-group">
-                                    <input class="form-control input-lg" type="text" id="email" placeholder="Email Address">
-                                    <div class="email-dropdown">
-                                    <ul class="list"></ul>
-                                    </div>
-                                </div>
-
-                            </div>
+                <div class="panel panel-primary">
+                    <h1>HELLO, My Name Is</h1>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" placeholder="My Name Is...">
+                    </div>
+                    <h1>Email</h1>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" id="email" placeholder="Email Address">
+                        <div class="email-dropdown">
+                            <ul class="list"></ul>
+                        </div>
+                    </div>
+                </div>
 
                 </div>
             </div>
             </div>
         </div>
 
-    <div class="row clearfix footer">
+    <div class="row clearfix footer" id="footer">
         <address>
             <strong>Contact Us</strong>
             <abbr title="Phone">P:</abbr> 1800 112 112
@@ -125,14 +123,6 @@
         </address>
     </div>
 
-    </div>
 </body>
-<script type="text/javascript">
-    $( function() {
-        $( "#accordion" ).accordion({
-            collapsible: true
-        });
-    } );
-</script>
-
+<script type="text/javascript" src="js/email.js"></script>
 </html>

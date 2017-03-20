@@ -30,37 +30,39 @@ html, body{
     font-size: 20px;
 }
 .nav-stacked dl{
+    margin-left: -2.2em;
     list-style-type: none;
-    text-align: left;
-    font-size: 18px;
+    text-align: center;
+    font-size: 20px;
     font-weight: 300;
+    width: 145%;
 }
 .nav-stacked dd{
     padding: 10px 15px;
 }
 .nav-stacked dl a{
     display: block;
-    color: #337ab7;
+    color: #db8c25;
 }
 
 .nav-stacked dl a:link{
-    color: #337ab7;
+    color: #db8c25;
     text-decoration: none;
 }
 .nav-stacked dl a:visited{
-    color: #337ab7;
+    color: #db8c25;
     text-decoration: none;
 }
 .nav-stacked dl a:hover{
     padding: 10px 15px;
     border-radius: 4px;
-    background-color: #337ab7;
-    color: #ffffff;
+    background-color: #e8d593;
     text-decoration: none;
 }
-
 /* EOF left-side navigation*/
 
+
+/*right-side content*/
 .carousel{
     margin-bottom: 30px;
 }
@@ -105,3 +107,8 @@ ul.list li{
 .lilight{
     background-color:#fafafa;
 }
+.btn-lg{
+    margin-left: 48%;
+    color: #6b2973;
+}
+/*EOF right-side content*/

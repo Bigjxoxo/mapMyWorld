@@ -5,7 +5,8 @@ html, body{
 .wrap{
     min-height: 100%;
     height: 100%;
-    background: #ffffff;
+    background:#ffffff url('../img/image4.gif') no-repeat;
+    background-position: 90% 60%;
 }
 .footer{
     margin: 0;
@@ -17,14 +18,21 @@ html, body{
 
 /*left-side navigation*/
 .top-area{
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     background-color: #6b2973;
 }
 .nav-bar{
     max-width: 250px;
     height: 780px;
     padding: 0;
-    background-color: #6b2973;
+    background-color: #dddddd;
+}
+.panel-default{
+    margin: 0 5px 0;
+    background-color:#6b2973;
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
 }
 .ui-accordion .ui-accordion-header{
     font-size: 20px;
@@ -64,11 +72,27 @@ html, body{
 
 /*right-side content*/
 .carousel{
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
+.carousel-button{
+    text-align: center;
+    color: #ffffff;
+}
+/*carousal button*/
+.btn{
+    margin-top: 1px;
+    background-color:#6b2973;
+    color: #ffffff;
+}
+.btn:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.btn:hover,.btn:focus,.btn-visited{
+    color: #ffffff;
+}
+/*carousal button*/
 .panel-primary{
-    margin-left: 20%;
-    margin-right: 20%;
+    margin: 0 20%;
     padding: 40px;
     height: 400px;
     background-color:#ffffff; /* IE6,IE7 */

@@ -9,11 +9,11 @@
     <link href="css/jquery-ui.min.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
     <link href="css/general-question.css" rel="stylesheet">
+    <link href="css/q3.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/load-pages.js"></script>
-    <script type="text/javascript" src="js/cookie.js"></script>
     <title>Map My World</title>
 </head>
 <body>
@@ -48,29 +48,45 @@
             </div>
         </div>
         <div class="col-xs-6 col-md-10 column">
-            <h1>The ways I communicate and make decisions</h1>
-            <div class="row clearfix" style="margin-top: 5%">
-                <div class="col-md-6 column form-group">
-                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>How I want to be involved:</h3>
-                    <textarea id="q2_info1" class="form-control" ></textarea>
-                </div>
-
-                <div class="col-md-6 column form-group">
-                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>I want whose help:</h3>
-                    <textarea id="q2_info2" class="form-control" placeholder="Who I want to help me in my NDIS planning meeting"></textarea>
+            <div class="side-bar"></div>
+            <form name='form' id='form'>
+            <h1>Important people to me
+                <small><br><em>Who are the important people in your life? Write them into the chart below</em></small></h1>
+            <div class="row clearfix">
+                <div class="col-md-12 column form-group">
+                    <h4>My Family</h4>
+                    <textarea id="q3_info11" name='q3-info11' class="form-control center-block" placeholder=""></textarea>
+                    <h4>Very Close to</h4>
+                    <textarea id="q3_info12" name='q3-info12' class="form-control center-block" placeholder=""></textarea>
                 </div>
             </div>
             <div class="row clearfix">
-                <div class="col-md-6 column form-group">
-                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>How I communicate:</h3>
-                    <textarea id="q2_info3" class="form-control" placeholder="What my NDIS representative needs to know about how I communicate"></textarea>
+                <div class="col-md-3 column form-group">
+                    <h4>Word/School</h4>
+                    <textarea id="q3_info21" name="q3-info21" class="form-control"></textarea>
                 </div>
-                <div class="col-md-6 column form-group">
-                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>Who makes the final decisions?</h3>
-                    <textarea id="q2_info4" class="form-control" placeholder=""></textarea>
+                <div class="col-md-3 column form-group">
+                    <h4>Very Close to</h4>
+                    <textarea  id="q3_info22" name="q3_info22" class="form-control" placeholder=""></textarea>
                 </div>
-                <div class="side-bar"></div>
+                <div class="col-md-3 column form-group">
+                    <h4>Very Close to</h4>
+                    <textarea  id="q3_info32" name="q3_info32" class="form-control"></textarea>
+                </div>
+                <div class="col-md-3 column form-group">
+                    <h4>Home & any paid supportors</h4>
+                    <textarea  id="q3_info31" name="q3_info31" class="form-control" placeholder=""></textarea>
+                </div>
             </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column form-group">
+                    <h4>Very close to</h4>
+                    <textarea  id="q3_info42" name="q3_info42" class="form-control center-block" placeholder=""></textarea>
+                    <h4>Friends and other important people</h4>
+                    <textarea  id="q3_info41" name="q3_info41" class="form-control center-block" placeholder=""></textarea>
+                </div>
+            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -78,21 +94,26 @@
 <div class="row clearfix footer"></div>
 </body>
 <script>
+
     function submitform() {
-        var info1 = document.getElementById('q2_info1').value;
-        var info2 = document.getElementById("q2_info2").value;
-        var info3 = document.getElementById("q2_info3").value;
-        var info4 = document.getElementById("q2_info4").value;
+        var form_element = document.getElementsByTagName('textarea');
+        var info1 =form_element[0].value;
+        var info2 =form_element[1].value;
+        var info3 =form_element[2].value;
+        var info4 =form_element[3].value;
+        var info5 =form_element[4].value;
+        var info6 =form_element[5].value;
+        var info7 =form_element[6].value;
+        var info8 =form_element[7].value;
         if (info1 !== "" && info2 !== "" && info3 !== "" && info4 !== "") {
-            var cart={
-                "q2_info1":info1,
-                "q2_info2":info2,
-                "q2_info3":info3,
-                "q2_info4":info4
+            var cart= {
+                "q3_info11": info1,
+                "q3_info12": info2,
+                "q2_info3": info3,
+                "q2_info4": info4
             };
-            console.log(cart);
             $.ajax({
-                url: "server/q2.php",
+                url: "server/q3.php",
                 data: cart,
                 type: "POST",
                 success: function (data) {
@@ -104,13 +125,12 @@
                     }
                 }
             });
-            window.location.href = "q3.html"
+            window.location.href = "q4.html"
         }else {
             alert("Please fill the form");
             console.log("fail")
         }
     }
-
     $(".side-bar").load("q1.html .side-bar");
     $(".banner").load("index.html .top-area");
     $(".footer").load("index.html #footer");

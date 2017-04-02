@@ -48,28 +48,27 @@
             </div>
         </div>
         <div class="col-xs-6 col-md-10 column">
-            <h1>The ways I communicate and make decisions</h1>
+            <h1>My health and wellbeing</h1>
             <div class="row clearfix" style="margin-top: 5%">
                 <div class="col-md-6 column form-group">
-                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>How I want to be involved:</h3>
-                    <textarea id="q2_info1" class="form-control" ></textarea>
+                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>[Example: I’ve got high blood pressure and diabetes]</h3>
+                    <textarea id="q7_info1" class="form-control" ></textarea>
                 </div>
 
                 <div class="col-md-6 column form-group">
-                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>I want whose help:</h3>
-                    <textarea id="q2_info2" class="form-control" placeholder="Who I want to help me in my NDIS planning meeting"></textarea>
+                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>[Example: Keeping fit and healthy]</h3>
+                    <textarea id="q7_info2" class="form-control" placeholder="Who I want to help me in my NDIS planning meeting"></textarea>
                 </div>
             </div>
             <div class="row clearfix">
                 <div class="col-md-6 column form-group">
-                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>How I communicate:</h3>
-                    <textarea id="q2_info3" class="form-control" placeholder="What my NDIS representative needs to know about how I communicate"></textarea>
+                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>[Example: I eat a balanced diet]</h3>
+                    <textarea id="q7_info3" class="form-control" placeholder="What my NDIS representative needs to know about how I communicate"></textarea>
                 </div>
                 <div class="col-md-6 column form-group">
-                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>Who makes the final decisions?</h3>
-                    <textarea id="q2_info4" class="form-control" placeholder=""></textarea>
+                    <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>What is not working well with my health</h3>
+                    <textarea id="q7_info4" class="form-control" placeholder="[Example: I抎 like to reduce my weight by joining an exercise class. I need to find a suitable class and someone to take me.]"></textarea>
                 </div>
-                <div class="side-bar"></div>
             </div>
         </div>
     </div>
@@ -78,40 +77,6 @@
 <div class="row clearfix footer"></div>
 </body>
 <script>
-    function submitform() {
-        var info1 = document.getElementById('q2_info1').value;
-        var info2 = document.getElementById("q2_info2").value;
-        var info3 = document.getElementById("q2_info3").value;
-        var info4 = document.getElementById("q2_info4").value;
-        if (info1 !== "" && info2 !== "" && info3 !== "" && info4 !== "") {
-            var cart={
-                "q2_info1":info1,
-                "q2_info2":info2,
-                "q2_info3":info3,
-                "q2_info4":info4
-            };
-            console.log(cart);
-            $.ajax({
-                url: "server/q2.php",
-                data: cart,
-                type: "POST",
-                success: function (data) {
-                    console.log(data);
-                    if (data == "success") {
-                        alert("success");
-                    } else {
-                        console.log(data);
-                    }
-                }
-            });
-            window.location.href = "q3.html"
-        }else {
-            alert("Please fill the form");
-            console.log("fail")
-        }
-    }
-
-    $(".side-bar").load("q1.html .side-bar");
     $(".banner").load("index.html .top-area");
     $(".footer").load("index.html #footer");
 </script>

@@ -13,8 +13,6 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/load-pages.js"></script>
-
-
     <title>Map My World</title>
 </head>
 <body>
@@ -64,7 +62,7 @@
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-6 column form-group">
-                        <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>What do I like about myself?</h3>
+                        <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>What do other people like about me?</h3>
                         <textarea id="q1_info3" class="form-control"></textarea>
                     </div>
                     <div class="col-md-6 column form-group">
@@ -73,7 +71,7 @@
                     </div>
                 </div>
                 <div class="side-bar">
-                    <a onclick="submitform()" class="icon-ad"><h4>Done</h4></a>
+                    <a href="#" onclick="submitform()" class="icon-ad"><h4>Done</h4></a>
                 </div>
             </div>
         </div>
@@ -87,14 +85,17 @@
         var info2 = document.getElementById("q1_info2").value;
         var info3 = document.getElementById("q1_info3").value;
         var info4 = document.getElementById("q1_info4").value;
-//        alert(info1+info2+info3+info4);
         if (info1 !== "" && info2 !== "" && info3 !== "" && info4 !== "") {
-            var continents = [info1, info2, info3, info4];
-            var jasonText = JSON.stringify(continents);
-            alert(jasonText);
+            var cart={
+                "q1_info1":info1,
+                "q1_info2":info2,
+                "q1_info3":info3,
+                "q1_info4":info4
+            };
+            console.log(cart);
             $.ajax({
-                url: "server/q2.php",
-                data: jasonText,
+                url: "server/q1.php",
+                data: cart,
                 type: "POST",
                 success: function (data) {
                     console.log(data);

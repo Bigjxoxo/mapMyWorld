@@ -17,7 +17,7 @@
 </head>
 <body onload="checkcookie()">
 <div class="container-fluid">
-    <div class="row clearfix wrap" style="background:#ffffff url('/img/image4.gif') no-repeat; background-position: 90% 60%;">
+    <div class="row clearfix wrap" style="background:#ffffff url('img/image4.gif') no-repeat; background-position: 90% 60%;">
         <div class="content">
             <div class="col-xs-6 col-md-2 column nav-bar" id="left-column">
                 <div class="top-area">
@@ -149,8 +149,6 @@
 
     startPageHandler = function() {
         var requestData = loginDetailsFormValid();
-//        console.log(requestData.user);
-//        console.log(requestData.email);
         if (requestData !== null) {
             var user=requestData.user.trim();
             var email=requestData.email.trim();
@@ -159,13 +157,10 @@
             var expires="expires="+d.toUTCString();
             document.cookie = "username="+user+";"+expires+"; path=/;";
             document.cookie = "email="+email+";"+expires+"; path=/;";
-
-            var continents= [requestData.user, requestData.email];
-            var jasonText = JSON.stringify(continents);
-            console.log(jasonText);
+            console.log(requestData);
             $.ajax({
-                url: "server/q1.php",
-                data: jasonText,
+                url: "server/index.php",
+                data: requestData,
                 type: "POST",
                 success: function (data) {
                     console.log(data);
@@ -197,8 +192,8 @@
         else
         {
             requestData = {
-                user: $("#user").val(),
-                email: $("#email").val()
+                "user": $("#user").val(),
+                "email": $("#email").val()
             };
             return requestData;
         }

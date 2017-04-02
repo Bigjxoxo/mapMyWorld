@@ -8,11 +8,13 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/jquery-ui.min.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
-    <link href="css/q1.css" rel="stylesheet">
+    <link href="css/general-question.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/load-pages.js"></script>
+
+
     <title>Map My World</title>
 </head>
 <body>
@@ -26,22 +28,22 @@
                         <dl>
                             <dd><a href="q1.html">Question1</a></dd>
                             <dd><a href="q2.html">Question2</a></dd>
-                            <dd><a href="#">Question3</a></dd>
-                            <dd><a href="#">Question4</a></dd>
-                            <dd><a href="#">Question5</a></dd>
-                            <dd><a href="#">Question6</a></dd>
-                            <dd><a href="#">Question7</a></dd>
-                            <dd><a href="#">Question8</a></dd>
-                            <dd><a href="#">Question9</a></dd>
+                            <dd><a href="q3.html">Question3</a></dd>
+                            <dd><a href="q4.html">Question4</a></dd>
+                            <dd><a href="q5.html">Question5</a></dd>
+                            <dd><a href="q6.html">Question6</a></dd>
+                            <dd><a href="q7.html">Question7</a></dd>
+                            <dd><a href="q8.html">Question8</a></dd>
+                            <dd><a href="q9.html">Question9</a></dd>
                         </dl>
                     </div>
                     <h2>DREAM & GOAL</h2>
                     <div class="nav-stacked">
                         <dl>
-                            <dd><a href="#">Question10</a></dd>
-                            <dd><a href="#">Question11</a></dd>
-                            <dd><a href="#">Question12</a></dd>
-                            <dd><a href="#">Question13</a></dd>
+                            <dd><a href="q10.html">Question10</a></dd>
+                            <dd><a href="q11.html">Question11</a></dd>
+                            <dd><a href="q12.html">Question12</a></dd>
+                            <dd><a href="q13.html">Question13</a></dd>
                         </dl>
                     </div>
                 </div>
@@ -52,23 +54,26 @@
                 <div class="row clearfix" style="margin-top: 5%">
                     <div class="col-md-6 column form-group">
                         <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>What is important to me?</h3>
-                        <textarea class="form-control" placeholder="Think about what makes you happy and what makes you sad"></textarea>
+                        <textarea id="q1_info1" class="form-control" placeholder="Think about what makes you happy and what makes you sad"></textarea>
                     </div>
 
                     <div class="col-md-6 column form-group">
                         <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>What do I like about myself?</h3>
-                        <textarea class="form-control"></textarea>
+                        <textarea id="q1_info2" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-6 column form-group">
                         <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>What do I like about myself?</h3>
-                        <textarea class="form-control"></textarea>
+                        <textarea id="q1_info3" class="form-control"></textarea>
                     </div>
                     <div class="col-md-6 column form-group">
                         <h3><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>How to best support me:</h3>
-                        <textarea class="form-control" placeholder="Think about how you like to be treated by the people who help you"></textarea>
+                        <textarea id="q1_info4" class="form-control" placeholder="Think about how you like to be treated by the people who help you"></textarea>
                     </div>
+                </div>
+                <div class="side-bar">
+                    <a onclick="submitform()" class="icon-ad"><h4>Done</h4></a>
                 </div>
             </div>
         </div>
@@ -77,8 +82,37 @@
         <div class="row clearfix footer"></div>
 </body>
 <script>
+    function submitform() {
+        var info1 = document.getElementById('q1_info1').value;
+        var info2 = document.getElementById("q1_info2").value;
+        var info3 = document.getElementById("q1_info3").value;
+        var info4 = document.getElementById("q1_info4").value;
+//        alert(info1+info2+info3+info4);
+        if (info1 !== "" && info2 !== "" && info3 !== "" && info4 !== "") {
+            var continents = [info1, info2, info3, info4];
+            var jasonText = JSON.stringify(continents);
+            alert(jasonText);
+            $.ajax({
+                url: "server/q2.php",
+                data: jasonText,
+                type: "POST",
+                success: function (data) {
+                    console.log(data);
+                    if (data == "success") {
+                        alert("success");
+                    } else {
+                        console.log(data);
+                    }
+                }
+            });
+            window.location.href = "q2.html"
+        }else {
+            alert("Please fill the form");
+            console.log("fail")
+        }
+    }
+
     $(".banner").load("index.html .top-area");
     $(".footer").load("index.html #footer");
 </script>
-
 </html>

@@ -12,18 +12,19 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/load-pages.js"></script>
+    <script type="text/javascript" src="js/cookie.js"></script>
     <title>Map My World</title>
 </head>
-<body>
+<body onload="checkcookie()">
 <div class="container-fluid">
-    <div class="row clearfix wrap">
+    <div class="row clearfix wrap" style="background:#ffffff url('/img/image4.gif') no-repeat; background-position: 90% 60%;">
         <div class="content">
             <div class="col-xs-6 col-md-2 column nav-bar" id="left-column">
                 <div class="top-area">
                     <a href="index.html"><img src="img/logo-index.gif" class="img-responsive center-block" alt="logo" style="padding-bottom: 10px"/></a>
                     <div class="panel panel-default">
-                        <div class="panel-body">
-                            NAME:<br>EMAIL:
+                        <div class="panel-body" id="cookie-panel">
+
                         </div>
                     </div>
                 </div>
@@ -33,22 +34,21 @@
                         <dl>
                             <dd><a href="q1.html">Question1</a></dd>
                             <dd><a href="q2.html">Question2</a></dd>
-                            <dd><a href="#">Question3</a></dd>
-                            <dd><a href="#">Question4</a></dd>
-                            <dd><a href="#">Question5</a></dd>
-                            <dd><a href="#">Question6</a></dd>
-                            <dd><a href="#">Question7</a></dd>
-                            <dd><a href="#">Question8</a></dd>
-                            <dd><a href="#">Question9</a></dd>
+                            <dd><a href="q3.html">Question3</a></dd>
+                            <dd><a href="q4.html">Question4</a></dd>
+                            <dd><a href="q5.html">Question5</a></dd>
+                            <dd><a href="q7.html">Question7</a></dd>
+                            <dd><a href="q8.html">Question8</a></dd>
+                            <dd><a href="q9.html">Question9</a></dd>
                         </dl>
                     </div>
                     <h2>DREAM & GOAL</h2>
                     <div class="nav-stacked">
                         <dl>
-                            <dd><a href="#">Question10</a></dd>
-                            <dd><a href="#">Question11</a></dd>
-                            <dd><a href="#">Question12</a></dd>
-                            <dd><a href="#">Question13</a></dd>
+                            <dd><a href="q10.html">Question10</a></dd>
+                            <dd><a href="q11.html">Question11</a></dd>
+                            <dd><a href="q12.html">Question12</a></dd>
+                            <dd><a href="q13.html">Question13</a></dd>
                         </dl>
                     </div>
                 </div>
@@ -100,8 +100,8 @@
 
                     <!-- 控制按钮 -->
                     <div style="text-align:center;">
-                        <input type="button" class="btn start-slide" value="Start">
-                        <input type="button" class="btn pause-slide" value="Pause">
+                        <input type="button" class="btn start-slide btn-carousel" value="Start">
+                        <input type="button" class="btn pause-slide btn-carousel" value="Pause">
                     </div>
                 </div>
 
@@ -119,7 +119,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-default btn-lg" onclick=startPageHandler()>
+                <button type="button" class="btn btn-default btn-lg center-block" onclick=startPageHandler()>
                     <span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
                 </button>
             </div>
@@ -152,12 +152,16 @@
 //        console.log(requestData.user);
 //        console.log(requestData.email);
         if (requestData !== null) {
+            var user=requestData.user.trim();
+            var email=requestData.email.trim();
+            var d = new Date();
+            d.setTime(d.getTime()+30*24*60*60*1000);
+            var expires="expires="+d.toUTCString();
+            document.cookie = "username="+user+";"+expires+"; path=/;";
+            document.cookie = "email="+email+";"+expires+"; path=/;";
 
-            var continents= new Array();
-            continents[0]=requestData.user;
-            continents[1]=requestData.email;
+            var continents= [requestData.user, requestData.email];
             var jasonText = JSON.stringify(continents);
-
             console.log(jasonText);
             $.ajax({
                 url: "server/q1.php",
@@ -172,7 +176,8 @@
                     }
                 }
             });
-//            window.location.href = "q1.html";
+            window.location.href = "q1.html";
+            return requestData
         }
         return false;
     }
@@ -221,6 +226,7 @@
             $("#myCarousel").carousel('pause');
         });
     });
+
 </script>
 <script type="text/javascript" src="js/email.js"></script>
 </html>

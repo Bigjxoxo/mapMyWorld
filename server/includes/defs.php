@@ -9,7 +9,7 @@ function check_user($email) {
     try {
         $db = get_db();
 
-        $query ="select * from user where email=:email";
+        $query ="select * from user where BINARY email=:email";
 
         $stmt = $db->prepare($query);
         $stmt->bindParam(":email", $email);

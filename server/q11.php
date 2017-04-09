@@ -7,7 +7,7 @@ require "includes/defs.php";
 session_start();
 
 $json;
-$email = $_SESSION['currentUser'];
+$email = $_COOKIE['email'];
 $data = array();
 
 $result = check_user($email);

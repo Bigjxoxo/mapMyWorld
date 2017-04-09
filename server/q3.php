@@ -7,7 +7,7 @@ require "includes/defs.php";
 session_start();
 
 $json;
-$email = $_SESSION['currentUser'];
+$email = $_COOKIE['email'];
 $data = array();
 
 $result = check_user($email);
@@ -22,9 +22,24 @@ if ($result['idUser']){
     array_push($data, $_POST['q3_info32']);
     array_push($data, $_POST['q3_info41']);
     array_push($data, $_POST['q3_info42']);
-
-    $return = add_info_q3($data);
-    $json = array ("result" => "success", "return" => $return);
+}
+$temp = 0; //a counter which indicates whether each value in $data exists or not
+for ($i = 0; $i<9; $i++)
+{
+    if(check_var($data[$i])){  //$data[$i] exists
+        $temp++;
+    }
+}
+$return = null;
+if($temp == 9){ //all the value in $data exist
+    if ($email !== null) {
+        $return = add_info_q3($data);
+        $json = array ("result" => "success", "return" => $return);
+    } else {
+        $json = array ("result" => "noUser", "return" => $return);
+    }
+}else{ //missing $data[$i], but it doesn't indicate which value is missing
+    $json = array ("result" => "missing value", "return" => $return);
 }
 
 echo json_encode($json);

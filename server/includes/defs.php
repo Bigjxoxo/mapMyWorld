@@ -342,19 +342,96 @@ function add_info_q11($data) {
         $stmt->bindParam(":0", $data[0]);
         $stmt->execute();
     }
-
+                
     try {
         $db = get_db();
-        $query ="update table11 set shortTerm=:1, longTerm=:2, bucketList=:3 where idUser=:0";
+        $query ="update table11 set shortTerm=:1 where idUser=:0";
 
         $stmt = $db->prepare($query);
         $stmt->bindParam(":0", $data[0]);
         $stmt->bindParam(":1", $data[1]);
-        $stmt->bindParam(":2", $data[2]);
-        $stmt->bindParam(":3", $data[3]);
         $stmt->execute();
 
         return $data[0];
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function add_info_q12($data) {
+    if(check_userID($data[0], "table11")) {
+        //delete_info($data[0], "table11");
+    } else {
+        $db = get_db();
+
+        $query ="insert into table11(idUser) values(:0)";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":0", $data[0]);
+        $stmt->execute();
+    }
+                
+    try {
+        $db = get_db();
+        $query ="update table11 set longTerm=:1 where idUser=:0";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":0", $data[0]);
+        $stmt->bindParam(":1", $data[1]);
+        $stmt->execute();
+
+        return $data[0];
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function add_info_q13($data) {
+    if(check_userID($data[0], "table11")) {
+        //delete_info($data[0], "table11");
+    } else {
+        $db = get_db();
+
+        $query ="insert into table11(idUser) values(:0)";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":0", $data[0]);
+        $stmt->execute();
+    }
+                
+    try {
+        $db = get_db();
+        $query ="update table11 set bucketList=:1 where idUser=:0";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":0", $data[0]);
+        $stmt->bindParam(":1", $data[1]);
+        $stmt->execute();
+
+        return $data[0];
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function get_users() {
+    try {
+        $db = get_db();
+        $query ="select idUser, name, email, created from user order by idUser";
+
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0)
+        {
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+        else
+        {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->rowCount();
+        }
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }

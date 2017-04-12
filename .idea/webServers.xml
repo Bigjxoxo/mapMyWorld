@@ -2,16 +2,11 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="dcc1c43b-3175-462a-a9bb-bb4127457663" name="server1" url="http://ndisproject.qianyujin.co/">
-        <fileTransfer host="109.199.119.93" port="21" rootFolder="/public_html/mapmyworld">
-          <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" />
-          </advancedOptions>
-          <option name="port" value="21" />
-        </fileTransfer>
-      </webServer>
       <webServer id="49210e38-c754-4c53-8073-ccdd0f7359a2" name="tomcat" url="http://localhost:8080/map">
         <fileTransfer port="0" mountedRoot="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\mapMyWorld" accessType="MOUNT" />
+      </webServer>
+      <webServer id="265cf778-0ed0-4010-8121-c694a39577c7" name="xampp" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="D:\xampp\htdocs\Project702" accessType="MOUNT" />
       </webServer>
     </option>
   </component>

@@ -4,15 +4,15 @@
  */
 require "includes/defs.php";
 
-session_start();
+//session_start();
 
 $json;
-$email = $_SESSION['currentUser'];
+$email = $_COOKIE['email'];
 $data = array();
 
 $result = check_user($email);
 
-if ($result['idUser']){
+if ($result['idUser']) {
     array_push($data, $result['idUser']);
     array_push($data, $_POST['q8_info11']);
     array_push($data, $_POST['q8_info12']);
@@ -30,11 +30,25 @@ if ($result['idUser']){
     array_push($data, $_POST['q8_info42']);
     array_push($data, $_POST['q8_info43']);
     array_push($data, $_POST['q8_info44']);
-
-    // add more rows - function check
-    $return = add_info_q8($data);
-    $json = array ("result" => "success", "return" => $return);
+    $temp = 0; //a counter which indicates whether each value in $data exists or not
+    for ($i = 0; $i<17; $i++)
+    {
+        if(check_var($data[$i])){  //$data[$i] exists
+            $temp++;
+        }
+    }
+    $return = null;
+    if($temp == 17){ //all the value in $data exist
+        $return = add_info_q8($data);
+        $json = array ("result" => "success", "return" => $return);
+    } else {
+        $json = array ("result" => "missing value", "return" => $return);
+    }
 }
+else{
+    $json = array ("result" => "noUser", "return" => $return);
+}
+
 
 echo json_encode($json);
 exit();

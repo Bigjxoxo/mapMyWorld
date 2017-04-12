@@ -4,6 +4,11 @@ require "db_defs.php";
 date_default_timezone_set('Australia/Brisbane');
 $date = date('m/d/Y h:i:s a', time());
 
+function check_var( $var){
+    //return( (isset($var) and !empty($var )) ? $var : (!empty($default) ? $default : false) );
+    return( isset($var) and !empty($var) );
+}
+
 function check_user($email) {
 
     try {

@@ -6,7 +6,7 @@ $date = date('m/d/Y h:i:s a', time());
 
 function check_var( $var){
     //return( (isset($var) and !empty($var )) ? $var : (!empty($default) ? $default : false) );
-    return( isset($var) and !empty($var) );
+    return( isset($var) and !empty($var) and trim($var) );
 }
 
 function check_user($email) {

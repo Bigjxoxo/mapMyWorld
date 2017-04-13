@@ -57,7 +57,6 @@
                     <textarea id="q11_info" class="form-control" placeholder="[Example: I’ve got high blood pressure and diabetes]" style="height: 300px"></textarea>
                 </div>
             </div>
-            <div class="side-bar"></div>
         </div>
     </div>
 </div>
@@ -65,48 +64,6 @@
 <div class="row clearfix footer"></div>
 </body>
 <script>
-    function submitform() {
-        var f = document.getElementsByTagName('textarea');
-        if (f[0].value!=="") {
-            var cart= {"q11_info": f[0].value};
-            console.log(cart);
-            $.ajax({
-                url: "server/q11.php",
-                data: cart,
-                type: "POST",
-                dataType:'json',
-                success: function (data) {
-                    console.log(data);
-                    var i, x="";
-                    for(i in data.result){
-                        x+=data.result[i];
-                    }
-                    console.log(x);
-                    if (x == "success") {
-                        console.log("the request and value delivered successfully");
-                    }
-                    else if(x=="noUser")
-                    {
-                        alert("No Record!\nPlease start from the beginning");
-                        window.location.href="index.html";
-                        console.log("Cookie is destroyed or same email address");
-                    }
-                    else {
-                        console.log("Thread went through the php, but data failed to deliver");
-                    }
-                },
-                error:function(XMLHttpRequest, textStatus, errorThrown){
-                    alert ("XMLHttpRequest.status="+XMLHttpRequest.status+"\ntextStatus="+textStatus+"\nerrorThrown=" + errorThrown);
-                }
-            });
-            window.location.href = "q12.html";
-        }else {
-            alert("Please fill the form");
-            console.log("fail")
-        }
-    }
-
-    $(".side-bar").load("q1.html .side-bar");
     $(".banner").load("index.html .top-area");
     $(".footer").load("index.html #footer");
 </script>

@@ -28,7 +28,6 @@ if ($result['idUser']) {
     array_push($data, $_POST['q6_info62']);
     array_push($data, $_POST['q6_info71']);
     array_push($data, $_POST['q6_info72']);
-<<<<<<< HEAD
     $temp = 0; //a counter which indicates whether each value in $data exists or not
     for ($i = 0; $i<15; $i++)
     {
@@ -46,26 +45,6 @@ if ($result['idUser']) {
 }
 else{
     $json = array ("result" => "noUser", "return" => $return);
-=======
-}
-$temp = 0; //a counter which indicates whether each value in $data exists or not
-for ($i = 0; $i<15; $i++)
-{
-    if(check_var($data[$i])){  //$data[$i] exists
-        $temp++;
-    }
-}
-$return = null;
-if($temp == 15){ //all the value in $data exist
-    if ($email !== null) {
-        $return = add_info_q6($data);
-        $json = array ("result" => "success", "return" => $return);
-    } else {
-        $json = array ("result" => "noUser", "return" => $return);
-    }
-}else{ //missing $data[$i], but it doesn't indicate which value is missing
-    $json = array ("result" => "missing value", "return" => $return);
->>>>>>> master
 }
 
 

@@ -37,29 +37,8 @@ if ($result['idUser']) {
 else{
     $json = array ("result" => "noUser", "return" => $return);
 }
-$temp = 0; //a counter which indicates whether each value in $data exists or not
-for ($i = 0; $i<5; $i++)
-{
-   if(check_var($data[$i])){  //$data[$i] exists
-       $temp++;
-   }
-}
-$return = null;
-if($temp == 5){ //all the value in $data exist
-    if ($email !== null) {
-        $return = add_info_q1($data);
-        $json = array ("result" => "success", "return" => $return);
-    } else {
-        $json = array ("result" => "noUser", "return" => $return);
-    }
-}else{ //missing $data[$i], but it doesn't indicate which value is missing
-    $json = array ("result" => "missing value", "return" => $return);
-}
 
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 /*
 if ($email !== null) {
     $return = add_info_q1($data);

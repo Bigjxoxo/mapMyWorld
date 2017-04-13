@@ -48,43 +48,43 @@
             </div>
         </div>
         <div class="col-xs-6 col-md-10 column">
+            <div class="side-bar"></div>
             <form name='form' id='form'>
             <h1>Important people to me
                 <small><br><em>Who are the important people in your life? Write them into the chart below</em></small></h1>
             <div class="row clearfix">
                 <div class="col-md-12 column form-group">
                     <h4>My Family</h4>
-                    <textarea id="q3_info11" name='q3-info11' class="form-control center-block" maxLength="1000"></textarea>
+                    <textarea id="q3_info11" name='q3-info11' class="form-control center-block" placeholder=""></textarea>
                     <h4>Very Close to</h4>
-                    <textarea id="q3_info12" name='q3-info12' class="form-control center-block" maxLength="1000"></textarea>
+                    <textarea id="q3_info12" name='q3-info12' class="form-control center-block" placeholder=""></textarea>
                 </div>
             </div>
             <div class="row clearfix">
                 <div class="col-md-3 column form-group">
                     <h4>Word/School</h4>
-                    <textarea id="q3_info21" name="q3-info21" class="form-control" maxLength="1000"></textarea>
+                    <textarea id="q3_info21" name="q3-info21" class="form-control"></textarea>
                 </div>
                 <div class="col-md-3 column form-group">
                     <h4>Very Close to</h4>
-                    <textarea  id="q3_info22" name="q3_info22" class="form-control" maxLength="1000"></textarea>
+                    <textarea  id="q3_info22" name="q3_info22" class="form-control" placeholder=""></textarea>
                 </div>
                 <div class="col-md-3 column form-group">
                     <h4>Very Close to</h4>
-                    <textarea  id="q3_info32" name="q3_info32" class="form-control" maxLength="1000"></textarea>
+                    <textarea  id="q3_info32" name="q3_info32" class="form-control"></textarea>
                 </div>
                 <div class="col-md-3 column form-group">
                     <h4>Home & any paid supportors</h4>
-                    <textarea  id="q3_info31" name="q3_info31" class="form-control" maxLength="1000"></textarea>
+                    <textarea  id="q3_info31" name="q3_info31" class="form-control" placeholder=""></textarea>
                 </div>
             </div>
             <div class="row clearfix">
                 <div class="col-md-12 column form-group">
                     <h4>Very close to</h4>
-                    <textarea  id="q3_info42" name="q3_info42" class="form-control center-block" maxLength="1000"></textarea>
+                    <textarea  id="q3_info42" name="q3_info42" class="form-control center-block" placeholder=""></textarea>
                     <h4>Friends and other important people</h4>
-                    <textarea  id="q3_info41" name="q3_info41" class="form-control center-block" maxLength="1000"></textarea>
+                    <textarea  id="q3_info41" name="q3_info41" class="form-control center-block" placeholder=""></textarea>
                 </div>
-                <div class="side-bar"></div>
             </div>
             </form>
         </div>
@@ -96,50 +96,44 @@
 <script>
 
     function submitform() {
-        var f = document.getElementsByTagName('textarea');
-        if (f[0].value!==""&&f[1].value!==""&&f[2].value!==""&&f[3].value!==""&&f[4].value!==""&&f[5].value!==""&&f[6].value!==""&&f[7].value!=="") {
-            var cart= {"q3_info11": f[0].value, "q3_info12": f[1].value, "q3_info21": f[2].value, "q3_info22": f[3].value, "q3_info32": f[4].value, "q3_info31": f[5].value, "q3_info42": f[6].value, "q3_info41": f[7].value};
-            console.log(cart);
+        var form_element = document.getElementsByTagName('textarea');
+        var info1 =form_element[0].value;
+        var info2 =form_element[1].value;
+        var info3 =form_element[2].value;
+        var info4 =form_element[3].value;
+        var info5 =form_element[4].value;
+        var info6 =form_element[5].value;
+        var info7 =form_element[6].value;
+        var info8 =form_element[7].value;
+        if (info1 !== "" && info2 !== "" && info3 !== "" && info4 !== "") {
+            var cart= {
+                "q3_info11": info1,
+                "q3_info12": info2,
+                "q2_info3": info3,
+                "q2_info4": info4
+            };
             $.ajax({
                 url: "server/q3.php",
                 data: cart,
                 type: "POST",
-                dataType:'json',
                 success: function (data) {
                     console.log(data);
-                    var i, x="";
-                    for(i in data.result){
-                        x+=data.result[i];
+                    if (data == "success") {
+                        alert("success");
+                    } else {
+                        console.log(data);
                     }
-                    console.log(x);
-                    if (x == "success") {
-                        console.log("the request and value delivered successfully");
-                    }
-                    else if(x=="noUser")
-                    {
-                        alert("No Record!\nPlease start from the beginning");
-                        window.location.href="index.html";
-                        console.log("Cookie is destroyed or same email address");
-                    }
-                    else {
-                        console.log("Thread went through the php, but data failed to deliver");
-                    }
-                },
-                error:function(XMLHttpRequest, textStatus, errorThrown){
-                    alert ("XMLHttpRequest.status="+XMLHttpRequest.status+"\ntextStatus="+textStatus+"\nerrorThrown=" + errorThrown);
                 }
             });
-            window.location.href = "q4.html";
+            window.location.href = "q4.html"
         }else {
             alert("Please fill the form");
             console.log("fail")
         }
     }
-
     $(".side-bar").load("q1.html .side-bar");
     $(".banner").load("index.html .top-area");
     $(".footer").load("index.html #footer");
-
 </script>
 
 </html>

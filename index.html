@@ -37,7 +37,6 @@
                             <dd><a href="q3.html">Question3</a></dd>
                             <dd><a href="q4.html">Question4</a></dd>
                             <dd><a href="q5.html">Question5</a></dd>
-                            <dd><a href="q6.html">Question6</a></dd>
                             <dd><a href="q7.html">Question7</a></dd>
                             <dd><a href="q8.html">Question8</a></dd>
                             <dd><a href="q9.html">Question9</a></dd>
@@ -151,7 +150,6 @@
     startPageHandler = function() {
         var requestData = loginDetailsFormValid();
         if (requestData !== null) {
-//            set Cookie
             var user=requestData.user.trim();
             var email=requestData.email.trim();
             var d = new Date();
@@ -159,40 +157,25 @@
             var expires="expires="+d.toUTCString();
             document.cookie = "username="+user+";"+expires+"; path=/;";
             document.cookie = "email="+email+";"+expires+"; path=/;";
-
+            console.log(requestData);
             $.ajax({
                 url: "server/index.php",
                 data: requestData,
                 type: "POST",
-                dataType:'json',
                 success: function (data) {
                     console.log(data);
-                    var i, x="";
-                    for(i in data.result){
-                        x+=data.result[i];
+                    if (data == "success") {
+                        alert("success");
+                    } else {
+                        console.log(data);
                     }
-                    console.log(x);
-                    if (x == "success") {
-                        console.log("the request and value delivered successfully");
-                    }
-                    else if(x=="noUser")
-                    {
-                        alert("No Record!\nPlease start from the beginning");
-                        window.location.href="index.html";
-                        console.log("Cookie is destroyed or same email address");
-                    }
-                    else {
-                        console.log("Thread went through the php, but data failed to deliver");
-                    }
-                },
-                error:function(XMLHttpRequest, textStatus, errorThrown){
-                    alert ("XMLHttpRequest.status="+XMLHttpRequest.status+"\ntextStatus="+textStatus+"\nerrorThrown=" + errorThrown);
                 }
             });
             window.location.href = "q1.html";
+            return requestData
         }
         return false;
-    };
+    }
 
     loginDetailsFormValid = function() {
         var user = document.getElementById("user").value;
@@ -215,7 +198,7 @@
             return requestData;
         }
         return null;
-    };
+    }
 
     function emailTest()
     {

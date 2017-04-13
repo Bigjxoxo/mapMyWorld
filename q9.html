@@ -125,61 +125,12 @@
                 </div>
 
             </div>
-            <div class="side-bar"></div>
         </div>
     </div>
 </div>
 <div class="row clearfix footer"></div>
 </body>
 <script>
-    function submitform() {
-        var f = document.getElementsByTagName('textarea');
-        if (f[0].value!==""&&f[1].value!==""&&f[2].value!==""&&f[3].value!==""&&f[4].value!==""&&f[5].value!==""&&f[6].value!==""&&f[7].value!==""&&f[8].value!==""&&f[9].value!==""&&f[10].value!==""&&f[11].value!==""
-            &&f[12].value!==""&&f[13].value!==""&&f[14].value!==""&&f[15].value!==""&&f[16].value!==""&&f[17].value!=="" &&f[18].value!==""&&f[19].value!==""&&f[20].value!==""&&f[21].value!==""&&f[22].value!==""&&f[23].value!==""&&f[24].value!==""
-        )
-        {
-            var cart= {"q9_info11": f[0].value, "q9_info12": f[1].value, "q9_info13": f[2].value, "q9_info14": f[3].value, "q9_info21": f[4].value, "q9_info22": f[5].value, "q9_info23": f[6].value, "q9_info24": f[7].value, "q9_info31": f[8].value, "q9_info32": f[9].value, "q9_info33": f[10].value, "q9_info34": f[11].value,
-                "q9_info41": f[12].value, "q9_info42": f[13].value, "q9_info43": f[14].value, "q9_info44": f[15].value, "q9_info51": f[16].value, "q9_info52": f[17].value, "q9_info53": f[18].value, "q9_info54": f[19].value, "q9_info61": f[20].value, "q9_info62": f[21].value, "q9_info63": f[22].value, "q9_info64": f[23].value
-                , "q9_additional": f[24].value
-            };
-            console.log(cart);
-            $.ajax({
-                url: "server/q9.php",
-                data: cart,
-                type: "POST",
-                dataType:'json',
-                success: function (data) {
-                    console.log(data);
-                    var i, x="";
-                    for(i in data.result){
-                        x+=data.result[i];
-                    }
-                    console.log(x);
-                    if (x == "success") {
-                        console.log("the request and value delivered successfully");
-                    }
-                    else if(x=="noUser")
-                    {
-                        alert("No Record!\nPlease start from the beginning");
-                        window.location.href="index.html";
-                        console.log("Cookie is destroyed or same email address");
-                    }
-                    else {
-                        console.log("Thread went through the php, but data failed to deliver");
-                    }
-                },
-                error:function(XMLHttpRequest, textStatus, errorThrown){
-                    alert ("XMLHttpRequest.status="+XMLHttpRequest.status+"\ntextStatus="+textStatus+"\nerrorThrown=" + errorThrown);
-                }
-            });
-            window.location.href = "q10.html";
-        }else {
-            alert("Please fill the form");
-            console.log("fail")
-        }
-    }
-
-    $(".side-bar").load("q1.html .side-bar");
     $(".banner").load("index.html .top-area");
     $(".footer").load("index.html #footer");
 

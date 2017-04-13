@@ -101,57 +101,12 @@
                     </tbody>
                 </table>
             </div>
-            <div class="side-bar"></div>
         </div>
     </div>
 </div>
 <div class="row clearfix footer"></div>
 </body>
 <script>
-    function submitform() {
-        var f = document.getElementsByTagName('textarea');
-        if (f[0].value!==""&&f[1].value!==""&&f[2].value!==""&&f[3].value!==""&&f[4].value!==""&&f[5].value!==""&&f[6].value!==""&&f[7].value!==""&&f[8].value!==""&&f[9].value!==""&&f[10].value!==""&&f[11].value!==""&&f[12].value!==""&&f[13].value!==""&&f[14].value!==""&&f[15].value!==""&&f[16].value!==""&&f[17].value!==""
-            &&f[18].value!==""&&f[19].value!==""&&f[20].value!=="")
-        {
-            var cart= {"q10_mon1": f[0].value, "q10_tue1": f[1].value, "q10_wed1": f[2].value, "q10_thu1": f[3].value, "q10_fri1": f[4].value, "q10_sat1": f[5].value, "q10_sun1": f[6].value, "q10_mon2": f[7].value, "q10_tue2": f[8].value,"q10_wed2": f[9].value, "q10_thu2": f[10].value, "q10_fri2": f[11].value, "q10_sat2": f[12].value, "q10_sun2": f[13].value, "q10_mon3": f[14].value, "q10_tue3": f[15].value, "q10_wed3": f[16].value, "q10_thu3": f[17].value,
-                "q10_fri3": f[18].value, "q10_sat3": f[19].value, "q10_sun3": f[20].value};
-            console.log(cart);
-            $.ajax({
-                url: "server/q10.php",
-                data: cart,
-                type: "POST",
-                dataType:'json',
-                success: function (data) {
-                    console.log(data);
-                    var i, x="";
-                    for(i in data.result){
-                        x+=data.result[i];
-                    }
-                    console.log(x);
-                    if (x == "success") {
-                        console.log("the request and value delivered successfully");
-                    }
-                    else if(x=="noUser")
-                    {
-                        alert("No Record!\nPlease start from the beginning");
-                        window.location.href="index.html";
-                        console.log("Cookie is destroyed or same email address");
-                    }
-                    else {
-                        console.log("Thread went through the php, but data failed to deliver");
-                    }
-                },
-                error:function(XMLHttpRequest, textStatus, errorThrown){
-                    alert ("XMLHttpRequest.status="+XMLHttpRequest.status+"\ntextStatus="+textStatus+"\nerrorThrown=" + errorThrown);
-                }
-            });
-            window.location.href = "q11.html";
-        }else {
-            alert("Please fill the form");
-            console.log("fail")
-        }
-    }
-    $(".side-bar").load("q1.html .side-bar");
     $(".banner").load("index.html .top-area");
     $(".footer").load("index.html #footer");
 

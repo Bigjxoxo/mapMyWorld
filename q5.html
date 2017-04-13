@@ -295,6 +295,7 @@
                         <h3>Things I like but haven't done for a while:</h3>
                         <textarea id="q9_interest" class="form-control" placeholder=""></textarea>
                     </div>
+                    <div class="side-bar"></div>
                 </div>
             </div>
         </div>
@@ -302,6 +303,64 @@
         <div class="row clearfix footer"></div>
 </body>
 <script>
+    function submitform() {
+        var f = document.getElementsByTagName('textarea');
+        if (f[0].value!==""&&f[1].value!==""&&f[2].value!==""&&f[3].value!==""&&f[4].value!==""&&f[5].value!==""&&f[6].value!==""&&f[7].value!==""&&f[8].value!==""
+            &&f[9].value!==""&&f[10].value!==""&&f[11].value!==""&&f[12].value!==""&&f[13].value!==""&&f[14].value!==""&&f[15].value!==""&&f[16].value!==""&&f[17].value!==""
+            &&f[18].value!==""&&f[19].value!==""&&f[20].value!==""&&f[21].value!==""&&f[22].value!==""&&f[23].value!==""&&f[24].value!==""&&f[25].value!==""&&f[26].value!==""
+            &&f[27].value!==""&&f[28].value!==""&&f[29].value!==""&&f[30].value!==""&&f[31].value!==""&&f[32].value!==""&&f[33].value!==""&&f[34].value!==""&&f[35].value!==""
+            &&f[36].value!==""&&f[37].value!==""&&f[38].value!==""&&f[39].value!==""&&f[40].value!==""&&f[41].value!==""&&f[42].value!==""&&f[43].value!==""&&f[44].value!==""
+            &&f[45].value!==""&&f[46].value!==""&&f[47].value!==""&&f[48].value!==""&&f[49].value!==""&&f[50].value!==""&&f[51].value!==""&&f[52].value!==""&&f[53].value!==""
+            &&f[54].value!==""&&f[55].value!==""&&f[56].value!==""&&f[57].value!==""&&f[58].value!==""&&f[59].value!==""&&f[60].value!==""&&f[61].value!==""&&f[62].value!==""
+            &&f[63].value!==""&&f[64].value!=="")
+        {
+            var cart= {"q5_mon11": f[0].value, "q5_mon21": f[1].value, "q5_mon31": f[2].value, "q5_mon12": f[3].value, "q5_mon22": f[4].value, "q5_mon32": f[5].value, "q5_mon13": f[6].value, "q5_mon23": f[7].value, "q5_mon33": f[8].value,
+                "q5_tue11": f[9].value, "q5_tue21": f[10].value, "q5_tue31": f[11].value, "q5_tue12": f[12].value, "q5_tue22": f[13].value, "q5_tue32": f[14].value, "q5_tue13": f[15].value, "q5_tue23": f[16].value, "q5_tue33": f[17].value,
+                "q5_web11": f[18].value, "q5_web21": f[19].value, "q5_web31": f[20].value, "q5_web12": f[21].value, "q5_web22": f[22].value, "q5_web32": f[23].value, "q5_web13": f[24].value, "q5_web23": f[25].value, "q5_web33": f[26].value,
+                "q5_thu11": f[27].value, "q5_thu21": f[28].value, "q5_thu31": f[29].value, "q5_thu12": f[30].value, "q5_thu22": f[31].value, "q5_thu32": f[32].value, "q5_thu13": f[33].value, "q5_thu23": f[34].value, "q5_thu33": f[35].value,
+                "q5_fri11": f[36].value, "q5_fri21": f[37].value, "q5_fri31": f[38].value, "q5_fri12": f[39].value, "q5_fri22": f[40].value, "q5_fri32": f[41].value, "q5_fri13": f[42].value, "q5_fri23": f[43].value, "q5_fri33": f[44].value,
+                "q5_sat11": f[45].value, "q5_sat21": f[46].value, "q5_sat31": f[47].value, "q5_sat12": f[48].value, "q5_sat22": f[49].value, "q5_sat32": f[50].value, "q5_sat13": f[51].value, "q5_sat23": f[52].value, "q5_sat33": f[53].value,
+                "q5_sun11": f[54].value, "q5_sun21": f[55].value, "q5_sun31": f[56].value, "q5_sun12": f[57].value, "q5_sun22": f[58].value, "q5_sun32": f[59].value, "q5_sun13": f[60].value, "q5_sun23": f[61].value, "q5_sun33": f[62].value,
+                "q9_hobby": f[63].value, "q9_interest": f[64].value
+            };
+            console.log(cart);
+            $.ajax({
+                url: "server/q5.php",
+                data: cart,
+                type: "POST",
+                dataType:'json',
+                success: function (data) {
+                    console.log(data);
+                    var i, x="";
+                    for(i in data.result){
+                        x+=data.result[i];
+                    }
+                    console.log(x);
+                    if (x == "success") {
+                        console.log("the request and value delivered successfully");
+                    }
+                    else if(x=="noUser")
+                    {
+                        alert("No Record!\nPlease start from the beginning");
+                        window.location.href="index.html";
+                        console.log("Cookie is destroyed or same email address");
+                    }
+                    else {
+                        console.log("Thread went through the php, but data failed to deliver");
+                    }
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                    alert ("XMLHttpRequest.status="+XMLHttpRequest.status+"\ntextStatus="+textStatus+"\nerrorThrown=" + errorThrown);
+                }
+            });
+            window.location.href = "q6.html";
+        }else {
+            alert("Please fill the form");
+            console.log("fail")
+        }
+    }
+
+    $(".side-bar").load("q1.html .side-bar");
     $(".banner").load("index.html .top-area");
     $(".footer").load("index.html #footer");
 

@@ -79,29 +79,39 @@
 </body>
 <script>
     function submitform() {
-        var info1 = document.getElementById('q2_info1').value;
-        var info2 = document.getElementById("q2_info2").value;
-        var info3 = document.getElementById("q2_info3").value;
-        var info4 = document.getElementById("q2_info4").value;
-        if (info1 !== "" && info2 !== "" && info3 !== "" && info4 !== "") {
-            var cart={
-                "q2_info1":info1,
-                "q2_info2":info2,
-                "q2_info3":info3,
-                "q2_info4":info4
-            };
+        var f = document.getElementsByTagName('textarea');
+        if (f[0].value!==""&&f[1].value!==""&&f[2].value!==""&&f[3].value!=="")
+        {
+            var cart= {"q2_info1": f[0].value, "q2_info2": f[1].value, "q2_info3": f[2].value, "q2_info4": f[3].value};
             console.log(cart);
             $.ajax({
                 url: "server/q2.php",
                 data: cart,
+                dataType: "json",
                 type: "POST",
+
                 success: function (data) {
                     console.log(data);
-                    if (data == "success") {
-                        alert("success");
-                    } else {
-                        console.log(data);
+                    var i, x="";
+                    for(i in data.result){
+                        x+=data.result[i];
                     }
+                    console.log(x);
+                    if (x == "success") {
+                        console.log("the request and value delivered successfully");
+                    }
+                    else if(x=="noUser")
+                    {
+                        alert("No Record!\nPlease start from the beginning");
+                        window.location.href="index.html";
+                        console.log("Cookie is destroyed or same email address");
+                    }
+                    else {
+                        console.log("Thread went through the php, but data failed to deliver");
+                    }
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                    alert ("XMLHttpRequest.status="+XMLHttpRequest.status+"\ntextStatus="+textStatus+"\nerrorThrown=" + errorThrown);
                 }
             });
             window.location.href = "q3.html"

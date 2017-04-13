@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="PublishConfigData">
     <serverData>
       <paths name="tomcat">
@@ -9,6 +10,10 @@
           </mappings>
         </serverdata>
       </paths>
+=======
+  <component name="PublishConfigData" serverName="xampp">
+    <serverData>
+>>>>>>> master
       <paths name="xampp">
         <serverdata>
           <mappings>

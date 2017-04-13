@@ -6,7 +6,11 @@ $date = date('m/d/Y h:i:s a', time());
 
 function check_var( $var){
     //return( (isset($var) and !empty($var )) ? $var : (!empty($default) ? $default : false) );
+<<<<<<< HEAD
     return( isset($var) and !empty($var) and trim($var) );
+=======
+    return( isset($var) and !empty($var) );
+>>>>>>> master
 }
 
 function check_user($email) {

@@ -81,9 +81,23 @@
 </body>
 <script>
     function submitform() {
+<<<<<<< HEAD
+        var info1 = document.getElementById('q1_info1').value;
+        var info2 = document.getElementById("q1_info2").value;
+        var info3 = document.getElementById("q1_info3").value;
+        var info4 = document.getElementById("q1_info4").value;
+        //if (info1 !== "" && info2 !== "" && info3 !== "" && info4 !== "") {
+            var cart={
+                "q1_info1":info1,
+                "q1_info2":info2,
+                "q1_info3":info3,
+                "q1_info4":info4
+            };
+=======
         var f = document.getElementsByTagName('textarea');
         if (f[0].value!==""&&f[1].value!==""&&f[2].value!==""&&f[3].value!=="") {
             var cart={"q1_info1": f[0].value, "q1_info2": f[1].value, "q1_info3": f[2].value, "q1_info4": f[3].value};
+>>>>>>> 57888822829c14b4acc0dc09fae1d17bdd9d7d93
             console.log(cart);
             $.ajax({
                 url: "server/q1.php",
@@ -114,11 +128,11 @@
                     alert ("XMLHttpRequest.status="+XMLHttpRequest.status+"\ntextStatus="+textStatus+"\nerrorThrown=" + errorThrown);
                 }
             });
-            window.location.href = "q2.html"
-        }else {
-            alert("Please fill the form");
-            console.log("fail")
-        }
+            //window.location.href = "q2.html"
+       // }else {
+       //     alert("Please fill the form");
+       //     console.log("fail")
+       // }
     }
 
     $(".banner").load("index.html .top-area");

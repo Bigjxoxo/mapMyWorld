@@ -3,10 +3,10 @@
 	define("HOST", "localhost");
 
 	// The database owner's name
-	define("USER", "root");
+	define("USER", "stacy");
 
 	// The database owner's password
-	define("PASSWORD", "root");
+	define("PASSWORD", "stacy");
 
 	// The database's name
 	define("DATABASE", "mapmyworld");

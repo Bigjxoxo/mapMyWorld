@@ -2,8 +2,13 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
+<<<<<<< HEAD
       <webServer id="49210e38-c754-4c53-8073-ccdd0f7359a2" name="tomcat" url="http://localhost:8080/map">
         <fileTransfer port="0" mountedRoot="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\mapMyWorld" accessType="MOUNT" />
+=======
+      <webServer id="742e9aad-4e49-48eb-82f7-df436d92f09a" name="xampp" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="C:\xampp\htdocs\mapMyWorld" accessType="MOUNT" />
+>>>>>>> 57888822829c14b4acc0dc09fae1d17bdd9d7d93
       </webServer>
       <webServer id="265cf778-0ed0-4010-8121-c694a39577c7" name="xampp" url="http://localhost">
         <fileTransfer port="0" mountedRoot="D:\xampp\htdocs\Project702" accessType="MOUNT" />

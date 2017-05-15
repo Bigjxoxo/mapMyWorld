@@ -16,6 +16,14 @@
     <script type="text/javascript" src="js/load-pages.js"></script>
     <script type="text/javascript" src="js/cookie.js"></script>
     <title>Map My World</title>
+    <style>
+        #dialog label, #dialog input { display:block; }
+        #dialog label { margin-top: 0.5em; }
+        #dialog input, #dialog textarea { width: 95%; }
+        #tabs { margin-top: 1em; }
+        #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+        #add_tab { cursor: pointer; }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -99,45 +107,180 @@
                     <h3>Who supports me to do this</h3>
                     <textarea id="q6_info92" class="form-control" placeholder=""></textarea>
                 </div>
+
             </div>
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg btn-block center-block" data-toggle="modal" data-target="#myModal">
+            <button type="button" id="add_tab" class="btn btn-primary btn-lg btn-block center-block" data-toggle="modal" data-target="#myModal" style="font-size: 18px;">
                 Name Your Activity
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">
-                                <input id="q6_info101" type="text" class="form-control" placeholder="Add a title to your activity">
-                            </h4>
-                        </div>
-                        <div class="modal-body">
-                            <textarea id="q6_info102" class="form-control" placeholder=""></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
+            <div id="dialog" title="Name your Activity">
+                <form>
+                    <fieldset class="ui-helper-reset">
+                        <label for="tab_title"></label>
+                        <input type="text" name="tab_title" id="tab_title" class="ui-widget-content ui-corner-all" placeholder="Your Activity">
+                        <label for="tab_content"></label>
+                        <textarea name="tab_content" id="tab_content" class="ui-widget-content ui-corner-all" placeholder="Your Activity Content"></textarea>
+                    </fieldset>
+                </form>
             </div>
+
+
+            <div class="side-bar"></div>
         </div>
     </div>
 </div>
 <div class="row clearfix footer"></div>
 </body>
 <script>
+    function submitform() {
+        var f = document.getElementsByTagName('textarea');
+        if (f[0].value!==""&&f[1].value!==""&&f[2].value!==""&&f[3].value!==""&&f[4].value!==""&&f[5].value!==""&&f[6].value!==""&&f[7].value!==""&&f[8].value!==""
+            )
+        {
+            var cart= {"q6_info11": f[0].value, "q6_info21": f[1].value, "q6_info31": f[2].value, "q6_info41": f[3].value, "q6_info51": f[4].value, "q6_info61": f[5].value, "q6_info71": f[6].value, "q6_info81": f[7].value, "q6_info91": f[8].value
+            };
+            console.log(cart);
+            $.ajax({
+                url: "server/q6.php",
+                data: cart,
+                type: "POST",
+                dataType:'json',
+                success: function (data) {
+                    console.log(data);
+                    var i, x="";
+                    for(i in data.result){
+                        x+=data.result[i];
+                    }
+                    console.log(x);
+                    if (x == "success") {
+                        console.log("the request and value delivered successfully");
+                    }
+                    else if(x=="noUser")
+                    {
+                        alert("No Record!\nPlease start from the beginning");
+                        window.location.href="index.html";
+                        console.log("Cookie is destroyed or same email address");
+                    }
+                    else {
+                        console.log("Thread went through the php, but data failed to deliver");
+                    }
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                    alert ("XMLHttpRequest.status="+XMLHttpRequest.status+"\ntextStatus="+textStatus+"\nerrorThrown=" + errorThrown);
+                }
+            });
+            window.location.href = "q7.html";
+        }else {
+            alert("Please fill the form");
+            console.log("fail")
+        }
+    }
+
+
+    $(".side-bar").load("q1.html .side-bar");
     $(".banner").load("index.html .top-area");
     $(".footer").load("index.html #footer");
 
+
     $( function() {
-        $( "#tabs" ).tabs();
+        var tabTitle = $( "#tab_title" ),
+            tabContent = $( "#tab_content" ),
+            tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
+            tabCounter = 10,
+            counter = 81;
+
+        var tabs = $( "#tabs" ).tabs();
+
+        // Modal dialog init: custom buttons and a "close" callback resetting the form inside
+        var dialog = $( "#dialog" ).dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                Add: function() {
+                    addTab(senddata());
+                    $( this ).dialog( "" );
+                },
+                Cancel: function() {
+                    $( this ).dialog( "close" );
+                }
+            },
+            close: function() {
+                form[ 0 ].reset();
+            }
+        });
+
+        // AddTab form: calls addTab function on submit and closes the dialog
+        var form = dialog.find( "form" ).on( "submit", function( event ) {
+            addTab();
+            dialog.dialog( "close" );
+            event.preventDefault();
+        });
+
+        // Actual addTab function: adds new tab using the input from the form above
+        function addTab() {
+            var label = tabTitle.val() || "Tab " + tabCounter,
+                id = "tabs-" + tabCounter,
+                li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+                tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+
+            tabs.find( ".ui-tabs-nav" ).append( li );
+            tabs.append( "<div id='" + id + "'><p>" + tabContentHtml + "</p></div>" );
+            tabs.tabs( "refresh" );
+            tabCounter++;
+            counter+=10;
+        }
+
+        // AddTab button: just opens the dialog
+        $( "#add_tab" )
+            .button()
+            .on( "click", function() {
+                dialog.dialog( "open" );
+            });
+
+        // Close icon: removing the tab on click
+        tabs.on( "click", "span.ui-icon-close", function() {
+            var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+            $( "#" + panelId ).remove();
+            tabs.tabs( "refresh" );
+        });
+
+        tabs.on( "keyup", function( event ) {
+            if ( event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE ) {
+                var panelId = tabs.find( ".ui-tabs-active" ).remove().attr( "aria-controls" );
+                $( "#" + panelId ).remove();
+                tabs.tabs( "refresh" );
+            }
+        });
+
+        function senddata() {
+            var titletext=document.getElementsByTagName('input')[0].value;
+            var bodytext=document.getElementsByTagName('textarea')[9].value;
+            var keyt="q6_info" + counter, keyb="q6_info" + (counter+1);
+            var v="{"+keyt+":"+titletext+","+keyb+":"+bodytext+"}";
+            var ddd=JSON.stringify(v);
+
+            console.log(ddd);
+            $.ajax({
+                url: "server/q6.php",
+                data: ddd,
+                type: "POST",
+                success: function (data) {
+                    console.log(x);
+                    if (x == "success") {
+                        console.log(0);
+                    }
+                    else {
+                        console.log(1);
+                    }
+                }
+            });
+        }
+
     } );
+
 </script>
 
 </html>
